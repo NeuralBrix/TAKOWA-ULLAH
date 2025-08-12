@@ -9,5 +9,5 @@ print(list_1[0::1])  # :: = end
 print(list_1[9::-1])  #index 9 to end with negetive step
 
 print(list_1[-1:-11:-1])   # use negetive indexing
-print(list_1[-10::1])
-print(list_1[::-1])
+print(list_1[-10::1]) #-10 to end with step 1
+print(list_1[::-1]) #start to end with revarce
