@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*','uncomplicated-yvette-flavoursome.ngrok-free.dev/' ,'localhost']
 
-
 # Application definition
 
 INSTALLED_APPS = [
