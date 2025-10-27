@@ -1,0 +1,218 @@
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>হৃদরোগ ঝুঁকি নির্ধারণ ফর্ম</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ADD8E6;
+            padding: 30px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            color: #2c3e50;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        form label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: 500;
+            color: #555;
+            font-size: 1.1em;
+        }
+        form input, form select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            background: #f0f8ff;
+            transition: border-color .3s, background .3s;
+            font-size: 1em;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        form input:focus, form select:focus {
+            border-color: #66aaff;
+            background: #ffffff;
+            outline: none;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px;
+            width: 100%;
+            background: #007bff;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background .3s, transform .2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        button:active {
+            background: #004494;
+            transform: translateY(0);
+        }
+        #resultMessage {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 600;
+        }
+        #resultMessage.low {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        #resultMessage.medium {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+        #resultMessage.high {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>হৃদরোগ ঝুঁকি নির্ধারণ ফর্ম</h2>
+        <form id="heartForm">
+            <label for="age">বয়স (age)</label>
+            <input type="number" id="age" name="age" placeholder="উদাহরণ: 63" required>
+
+            <label for="sex">লিঙ্গ (sex) — 1 = পুরুষ, 0 = মহিলা</label>
+            <select id="sex" name="sex" required>
+                <option value="">--- নির্বাচন করুন ---</option>
+                <option value="1">পুরুষ</option>
+                <option value="0">মহিলা</option>
+            </select>
+
+            <label for="cp">চেস্ট পেইন টাইপ (cp) (১-৪)</label>
+            <input type="number" id="cp" name="cp" min="1" max="4" placeholder="১-৪ এর মধ্যে দিন" required>
+
+            <label for="trestbps">রেস্টিং ব্লাড প্রেসার (trestbps) (mm Hg)</label>
+            <input type="number" id="trestbps" name="trestbps" placeholder="উদাহরণ: 145" required>
+
+            <label for="chol">সিরাম কোলেস্টরল (chol) (mg/dl)</label>
+            <input type="number" id="chol" name="chol" placeholder="উদাহরণ: 233" required>
+
+            <label for="fbs">ফাস্টিং ব্লাড সুগার > 120 mg/dl (fbs)</label>
+            <select id="fbs" name="fbs" required>
+                <option value="">--- নির্বাচন করুন ---</option>
+                <option value="1">True</option>
+                <option value="0">False</option>
+            </select>
+
+            <label for="restecg">রেস্টিং ইলেকট্রোকার্ডিওগ্রাফি ফলাফল (restecg) (0-2)</label>
+            <input type="number" id="restecg" name="restecg" min="0" max="2" placeholder="উদাহরণ: 0" required>
+
+            <label for="thalch">ম্যাক্সিমাম হার্ট রেট অর্জিত (thalch)</label>
+            <input type="number" id="thalch" name="thalch" placeholder="উদাহরণ: 150" required>
+
+            <label for="exang">এক্সারসাইজ ইনডিউসড অ্যাঙ্গিনা (exang)</label>
+            <select id="exang" name="exang" required>
+                <option value="">--- নির্বাচন করুন ---</option>
+                <option value="1">True</option>
+                <option value="0">False</option>
+            </select>
+
+            <label for="oldpeak">Oldpeak (exercise vs rest ST ডিপ্রেশন)</label>
+            <input type="number" step="0.1" id="oldpeak" name="oldpeak" placeholder="উদাহরণ: 2.3" required>
+
+            <label for="slope">ST সেগমেন্টের স্লোপ (slope) (1-3)</label>
+            <input type="number" id="slope" name="slope" min="1" max="3" placeholder="উদাহরণ: 2" required>
+
+            <label for="ca">মেজর রক্তনালী সংখ্যা (ca) (0-4)</label>
+            <input type="number" id="ca" name="ca" min="0" max="4" placeholder="উদাহরণ: 0" required>
+
+            <label for="thal">থাল (thal) — 3 = normal, 6 = fixed defect, 7 = reversible defect</label>
+            <select id="thal" name="thal" required>
+                <option value="">--- নির্বাচন করুন ---</option>
+                <option value="3">3 - normal</option>
+                <option value="6">6 - fixed defect</option>
+                <option value="7">7 - reversible defect</option>
+            </select>
+
+            <!-- Result button added as requested -->
+            <button type="button" id="resultBtn">ফলাফল দেখুন</button>
+
+            <div id="resultMessage"></div>
+        </form>
+    </div>
+
+    <script>
+        // Simple heuristic scoring to show result when "ফলাফল দেখুন" is clicked.
+        // This is not a medical diagnosis. For production use a validated model.
+        document.getElementById('resultBtn').addEventListener('click', function () {
+            const get = id => {
+                const el = document.getElementById(id);
+                return el ? (el.type === 'select-one' || el.type === 'number' || el.type === 'text' ? el.value : el.value) : '';
+            };
+
+            const age = Number(get('age'));
+            const cp = Number(get('cp'));
+            const trestbps = Number(get('trestbps'));
+            const chol = Number(get('chol'));
+            const fbs = Number(get('fbs'));
+            const thalch = Number(get('thalch'));
+            const exang = Number(get('exang'));
+            const oldpeak = Number(get('oldpeak'));
+            const slope = Number(get('slope'));
+            const ca = Number(get('ca'));
+            const thal = Number(get('thal'));
+
+            // basic risk factor count (heuristic)
+            let score = 0;
+            if (age >= 55) score++;
+            if (cp >= 3) score++;
+            if (trestbps >= 140) score++;
+            if (chol >= 240) score++;
+            if (fbs === 1) score++;
+            if (exang === 1) score++;
+            if (oldpeak > 1.5) score++;
+            if (thalch < 130) score++;
+            if (slope === 1) score++;
+            if (ca >= 1) score++;
+            if (thal === 6 || thal === 7) score++;
+
+            const resultDiv = document.getElementById('resultMessage');
+            resultDiv.style.display = 'block';
+
+            // Interpret score
+            if (score >= 7) {
+                resultDiv.className = 'high';
+                resultDiv.textContent = `উচ্চ ঝুঁকি (স্কোর: ${score}) — দ্রুত চিকিৎসা পরামর্শ নিন।`;
+            } else if (score >= 4) {
+                resultDiv.className = 'medium';
+                resultDiv.textContent = `মধ্যম ঝুঁকি (স্কোর: ${score}) — মনোযোগ এবং পর্যবেক্ষণ প্রয়োজন।`;
+            } else {
+                resultDiv.className = 'low';
+                resultDiv.textContent = `কম ঝুঁকি (স্কোর: ${score}) — নিয়মিত পরীক্ষা চালিয়ে যান।`;
+            }
+
+            // Scroll to result for better UX
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    </script>
+</body>
+</html>
